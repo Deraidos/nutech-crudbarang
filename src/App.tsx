@@ -1,13 +1,4 @@
 import { Button } from "@/components/ui/button"
-import {
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table"
 
 import './App.css'
 import { useSelector } from "react-redux"
@@ -18,9 +9,6 @@ import TabelBarang from "./components/TabelBarang"
 function App() {
 
   const dispatch = useDispatch()
-
-  const listBarang = useSelector(
-    (state: RootState) => state.barang.value)
 
   return (
     <div className='flex flex-col gap-3 mx-auto'>
