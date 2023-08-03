@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Button } from "./ui/button";
 import { useDispatch, useSelector } from "react-redux";
 import { addBarang } from "@/redux/slices/barangSlice";
-import { nanoid } from "@reduxjs/toolkit";
+import { RootState } from "@/redux/store";
 
 export default function FormTambahBarang({ barang }) {
   const [namaBarang, setNamaBarang] = useState(barang ? barang.namaBarang : '');
