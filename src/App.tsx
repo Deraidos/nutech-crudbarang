@@ -1,14 +1,10 @@
 import { Button } from "@/components/ui/button"
 
 import './App.css'
-import { useSelector } from "react-redux"
-import { RootState } from "./redux/store"
-import { useDispatch } from "react-redux"
 import TabelBarang from "./components/TabelBarang"
+import FormTambahBarang from "./components/FormTambahBarang"
 
 function App() {
-
-  const dispatch = useDispatch()
 
   return (
     <div className='flex flex-col gap-3 mx-auto'>
@@ -19,8 +15,7 @@ function App() {
       <section className='flex flex-row justify-between'>
         <div id='add item' className='flex flex-col gap-3'>
           <h2 className='text-2xl'>Tambah Barang</h2>
-          {/* form goes here */}
-          <Button variant="default">Tambah</Button>
+          <FormTambahBarang />
         </div>
 
         <aside className='flex flex-col gap-3 w-[75%]'>
