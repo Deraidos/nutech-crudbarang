@@ -16,9 +16,12 @@ export const barangSlice = createSlice({
     addBarang: (state, action: PayloadAction<string>) => {
       state.value.push(action.payload)
     },
+    deleteBarang: (state, action: PayloadAction<any>) => {
+      state.value.pop(action.payload)
+    },
   },
 })
 
-export const { addBarang } = barangSlice.actions
+export const { addBarang, deleteBarang } = barangSlice.actions
 
 export default barangSlice.reducer

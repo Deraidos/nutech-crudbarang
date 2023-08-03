@@ -41,12 +41,6 @@ export default function FormTambahBarang({ barang }) {
     setFoto(null)
 
 
-    // if (barang) {
-    //   newBarang.id = barang.id;
-    //   dispatch(updateBarang(newBarang));
-    // } else {
-    //   dispatch(addBarang(newBarang));
-    // }
   }
 
   return (

@@ -7,13 +7,20 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { Button } from "./ui/button"
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 import { RootState } from "@/redux/store"
+import { deleteBarang } from "@/redux/slices/barangSlice"
 
 export default function TabelBarang() {
-
+  const dispatch = useDispatch()
   const listBarang = useSelector(
     (state: RootState) => state.barang.value)
+
+  const handleDelete = () => {
+    if (window.confirm('Yakin ingin menghapus barang ini?')) {
+      dispatch(deleteBarang(listBarang.namaBarang));
+    }
+  }
 
   return (
     <Table>
@@ -44,7 +51,7 @@ export default function TabelBarang() {
               <TableCell>{barang.stok}</TableCell>
               <TableCell className="flex gap-1">
                 <Button>Edit</Button>
-                <Button variant="destructive">Delete</Button>
+                <Button variant="destructive" onClick={handleDelete}>Delete</Button>
               </TableCell>
             </TableRow>
           ))
