@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button"
 
 import './App.css'
+import 'react-toastify/dist/ReactToastify.css';
 import TabelBarang from "./components/TabelBarang"
 import FormTambahBarang from "./components/FormTambahBarang"
 

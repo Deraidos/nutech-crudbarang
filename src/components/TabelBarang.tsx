@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/table"
 import { Button } from "./ui/button"
 import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+
 // redux
 import { useSelector, useDispatch } from "react-redux"
 import { RootState } from "@/redux/store"
