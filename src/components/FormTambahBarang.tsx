@@ -3,8 +3,9 @@ import { Button } from "./ui/button";
 import { useDispatch, useSelector } from "react-redux";
 import { addBarang } from "@/redux/slices/barangSlice";
 import { RootState } from "@/redux/store";
+import { toast } from "react-toastify";
 
-export default function FormTambahBarang({ barang }: string) {
+export default function FormTambahBarang({ barang }) {
   const [namaBarang, setNamaBarang] = useState(barang ? barang.namaBarang : '');
   const [hargaBeli, setHargaBeli] = useState(barang ? barang.hargaBeli : '');
   const [hargaJual, setHargaJual] = useState(barang ? barang.hargaJual : '');
@@ -33,6 +34,17 @@ export default function FormTambahBarang({ barang }: string) {
     }
 
     dispatch(addBarang(newBarang))
+
+    toast('Barang ditambahkan', {
+      position: "top-center",
+      autoClose: 1000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      type: "success",
+    });
 
     setNamaBarang('')
     setHargaBeli('')

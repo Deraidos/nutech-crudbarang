@@ -24,11 +24,22 @@ export default function TabelBarang() {
   const handleDelete = (e) => {
     if (window.confirm('Yakin ingin menghapus barang ini?')) {
       dispatch(deleteBarang(listBarang.namaBarang));
+      toast('Barang dihapus', {
+        position: "top-center",
+        autoClose: 1000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        type: "success",
+      });
     }
   }
 
   return (
     <Table>
+      <ToastContainer />
       <TableHeader>
         <TableRow>
           <TableHead>Foto Barang</TableHead>
