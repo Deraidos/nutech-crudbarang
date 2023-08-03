@@ -21,7 +21,7 @@ export default function TabelBarang() {
   const listBarang = useSelector(
     (state: RootState) => state.barang.value)
 
-  const handleDelete = (e) => {
+  const handleDelete = () => {
     if (window.confirm('Yakin ingin menghapus barang ini?')) {
       dispatch(deleteBarang(listBarang.namaBarang));
       toast('Barang dihapus', {
@@ -92,4 +92,4 @@ export default function TabelBarang() {
       </TableBody> */}
     </Table>
   )
-};
+}

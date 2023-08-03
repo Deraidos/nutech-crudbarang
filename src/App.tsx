@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/button"
 
 import './App.css'
 import 'react-toastify/dist/ReactToastify.css';
@@ -16,7 +15,7 @@ function App() {
       <section className='flex flex-row justify-between'>
         <div id='add item' className='flex flex-col gap-3'>
           <h2 className='text-2xl'>Tambah Barang</h2>
-          <FormTambahBarang />
+          <FormTambahBarang barang={undefined} />
         </div>
 
         <aside className='flex flex-col gap-3 w-[75%]'>
