@@ -7,16 +7,21 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { Button } from "./ui/button"
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+// redux
 import { useSelector, useDispatch } from "react-redux"
 import { RootState } from "@/redux/store"
 import { deleteBarang } from "@/redux/slices/barangSlice"
+
+
 
 export default function TabelBarang() {
   const dispatch = useDispatch()
   const listBarang = useSelector(
     (state: RootState) => state.barang.value)
 
-  const handleDelete = () => {
+  const handleDelete = (e) => {
     if (window.confirm('Yakin ingin menghapus barang ini?')) {
       dispatch(deleteBarang(listBarang.namaBarang));
     }

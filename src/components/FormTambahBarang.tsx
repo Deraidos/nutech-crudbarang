@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addBarang } from "@/redux/slices/barangSlice";
 import { RootState } from "@/redux/store";
 
-export default function FormTambahBarang({ barang }) {
+export default function FormTambahBarang({ barang }: string) {
   const [namaBarang, setNamaBarang] = useState(barang ? barang.namaBarang : '');
   const [hargaBeli, setHargaBeli] = useState(barang ? barang.hargaBeli : '');
   const [hargaJual, setHargaJual] = useState(barang ? barang.hargaJual : '');
@@ -39,7 +39,6 @@ export default function FormTambahBarang({ barang }) {
     setHargaJual('')
     setStok('')
     setFoto(null)
-
 
   }
 
