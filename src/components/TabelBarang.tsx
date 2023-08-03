@@ -20,6 +20,7 @@ export default function TabelBarang() {
       <TableHeader>
         <TableRow>
           <TableHead>ID</TableHead>
+          <TableHead>Foto Barang</TableHead>
           <TableHead>Nama Barang</TableHead>
           <TableHead>Harga Beli</TableHead>
           <TableHead>Harga Jual</TableHead>
@@ -38,6 +39,7 @@ export default function TabelBarang() {
           listBarang.map((barang) => (
             <TableRow key={barang.id}>
               <TableCell>{barang.id}</TableCell>
+              <TableCell><img src="https://random.imagecdn.app/200/200" alt="" /></TableCell>
               <TableCell className="font-medium">{barang.namaBarang}</TableCell>
               <TableCell>Rp {barang.hargaBeli}</TableCell>
               <TableCell>Rp {barang.hargaJual}</TableCell>
