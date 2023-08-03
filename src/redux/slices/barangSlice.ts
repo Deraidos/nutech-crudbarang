@@ -1,3 +1,4 @@
+import { Barang } from '@/interfaces'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 interface BarangState {
@@ -16,7 +17,7 @@ export const barangSlice = createSlice({
     addBarang: (state, action: PayloadAction) => {
       state.value.push(action.payload)
     },
-    deleteBarang: (state, action: PayloadAction) => {
+    deleteBarang: (state, action: PayloadAction<Barang>) => {
       state.value.pop(action.payload)
     },
   },

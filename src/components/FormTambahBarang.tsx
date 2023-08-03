@@ -1,17 +1,20 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState } from "react";
 import { Button } from "./ui/button";
+import { toast } from "react-toastify";
+
 import { useDispatch, useSelector } from "react-redux";
 import { addBarang } from "@/redux/slices/barangSlice";
 import { RootState } from "@/redux/store";
-import { toast } from "react-toastify";
+import { Barang } from '../interfaces';
 
 export default function FormTambahBarang({ barang }) {
   const [namaBarang, setNamaBarang] = useState(barang ? barang.namaBarang : '');
   const [hargaBeli, setHargaBeli] = useState(barang ? barang.hargaBeli : '');
   const [hargaJual, setHargaJual] = useState(barang ? barang.hargaJual : '');
   const [stok, setStok] = useState(barang ? barang.stok : '');
-  const [foto, setFoto] = useState(null);
+  // const [foto, setFoto] = useState(null);
 
   const dispatch = useDispatch()
   const listBarang = useSelector(
@@ -19,6 +22,7 @@ export default function FormTambahBarang({ barang }) {
 
   const handleAddBarang = (e) => {
     e.preventDefault()
+
     const isNamaBarangUnique = !listBarang.some((barang) => barang.namaBarang === namaBarang);
 
     if (!isNamaBarangUnique) {
@@ -26,14 +30,14 @@ export default function FormTambahBarang({ barang }) {
       return
     }
 
-    const newBarang = {
+    const newBarang: Barang = {
       namaBarang,
       hargaBeli,
       hargaJual,
       stok,
       foto: <img src={`https://picsum.photos/200?random=${Math.random()}`} />
     }
-
+    // @ts-ignore
     dispatch(addBarang(newBarang))
 
     toast('Barang ditambahkan', {
@@ -51,7 +55,7 @@ export default function FormTambahBarang({ barang }) {
     setHargaBeli('')
     setHargaJual('')
     setStok('')
-    setFoto(null)
+    // setFoto(null)
 
   }
 
