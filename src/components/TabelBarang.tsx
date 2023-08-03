@@ -61,10 +61,10 @@ export default function TabelBarang() {
           listBarang.map((barang) => (
             <TableRow key={barang.id}>
               <TableCell>{barang.foto}</TableCell>
-              <TableCell className="font-medium">{barang.namaBarang}</TableCell>
-              <TableCell>Rp {barang.hargaBeli}</TableCell>
-              <TableCell>Rp {barang.hargaJual}</TableCell>
-              <TableCell>{barang.stok}</TableCell>
+              <TableCell className="font-medium"><p>{barang.namaBarang}</p></TableCell>
+              <TableCell><p>Rp {barang.hargaBeli}</p></TableCell>
+              <TableCell><p>Rp {barang.hargaJual}</p></TableCell>
+              <TableCell><p>{barang.stok}</p></TableCell>
               <TableCell className="flex gap-1">
                 <Button>Edit</Button>
                 <Button variant="destructive" onClick={handleDelete}>Delete</Button>
