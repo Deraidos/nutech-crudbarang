@@ -51,13 +51,7 @@ export default function TabelBarang() {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {!listBarang ? (
-          <TableRow>
-            <TableCell colSpan={8} align="center">
-              <p>Tidak ada barang</p>
-            </TableCell>
-          </TableRow>
-        ) : (
+        {listBarang && listBarang.length ? (
           listBarang.map((barang) => (
             <TableRow key={barang.id}>
               <TableCell>{barang.foto}</TableCell>
@@ -71,6 +65,12 @@ export default function TabelBarang() {
               </TableCell>
             </TableRow>
           ))
+        ) : (
+          <TableRow>
+            <TableCell colSpan={8} align="center">
+              <p>Tidak ada barang</p>
+            </TableCell>
+          </TableRow>
         )}
       </TableBody>
 

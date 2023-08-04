@@ -33,13 +33,11 @@ export const barangSlice = createSlice({
       state.value.push(action.payload)
     },
     deleteBarang: (state, action: PayloadAction<Barang>) => {
-      return state.value.filter((barang) => barang.id !== action.payload)
-      // state.value = state.value.filter((barang) => barang.id !== action.payload)
-      // const { id } = action.payload
-      // const currentBarang = state.value.find((barang) => barang.id === id)
-      // if (currentBarang) {
-      //   return state.value.filter((barang) => barang.id !== id)
-      // }
+      // const idToDelete = action.payload.id
+      // state.value = state.value.filter((barang) => barang.id !== idToDelete)
+      state.value = state.value.filter(
+        (barang) => barang.id !== action.payload.id
+      )
     },
   },
 })
