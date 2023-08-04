@@ -23,7 +23,8 @@ export default function TabelBarang() {
 
   const handleDelete = (id) => {
     if (window.confirm('Yakin ingin menghapus barang ini?')) {
-      dispatch(deleteBarang({ id }));
+      const barangToDelete = listBarang.find((barang) => barang.id === id)
+      dispatch(deleteBarang(barangToDelete));
       toast('Barang dihapus', {
         position: "top-center",
         autoClose: 1000,
