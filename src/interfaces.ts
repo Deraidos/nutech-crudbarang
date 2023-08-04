@@ -1,4 +1,5 @@
 export interface Barang {
+  id: string
   namaBarang: string
   hargaBeli: number
   hargaJual: number

@@ -1,5 +1,5 @@
 import { Barang } from '@/interfaces'
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createSlice, nanoid, PayloadAction } from '@reduxjs/toolkit'
 
 interface BarangState {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -7,7 +7,22 @@ interface BarangState {
 }
 
 const initialState: BarangState = {
-  value: [],
+  value: [
+    {
+      id: nanoid(),
+      namaBarang: 'Kipas Angin',
+      hargaBeli: 10,
+      hargaJual: 20,
+      stok: 10,
+    },
+    {
+      id: nanoid(),
+      namaBarang: 'Air Conditioner',
+      hargaBeli: 50,
+      hargaJual: 100,
+      stok: 5,
+    },
+  ],
 }
 
 export const barangSlice = createSlice({
@@ -18,7 +33,13 @@ export const barangSlice = createSlice({
       state.value.push(action.payload)
     },
     deleteBarang: (state, action: PayloadAction<Barang>) => {
-      state.value.pop(action.payload)
+      return state.value.filter((barang) => barang.id !== action.payload)
+      // state.value = state.value.filter((barang) => barang.id !== action.payload)
+      // const { id } = action.payload
+      // const currentBarang = state.value.find((barang) => barang.id === id)
+      // if (currentBarang) {
+      //   return state.value.filter((barang) => barang.id !== id)
+      // }
     },
   },
 })

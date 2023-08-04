@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addBarang } from "@/redux/slices/barangSlice";
 import { RootState } from "@/redux/store";
 import { Barang } from '../interfaces';
+import { nanoid } from "@reduxjs/toolkit";
 
 export default function FormTambahBarang({ barang }) {
   const [namaBarang, setNamaBarang] = useState(barang ? barang.namaBarang : '');
@@ -16,9 +17,9 @@ export default function FormTambahBarang({ barang }) {
   const [stok, setStok] = useState(barang ? barang.stok : '');
   // const [foto, setFoto] = useState(null);
 
-  const dispatch = useDispatch()
   const listBarang = useSelector(
     (state: RootState) => state.barang.value)
+  const dispatch = useDispatch()
 
   const handleAddBarang = (e) => {
     e.preventDefault()
@@ -31,6 +32,7 @@ export default function FormTambahBarang({ barang }) {
     }
 
     const newBarang: Barang = {
+      id: nanoid(),
       namaBarang,
       hargaBeli,
       hargaJual,
@@ -67,11 +69,11 @@ export default function FormTambahBarang({ barang }) {
       </div>
       <div className="flex flex-col">
         <label>Harga Beli</label>
-        <input type="number" value={hargaBeli} onChange={(e) => setHargaBeli(e.target.value)} required className="border border-slate-400 h-7 rounded-sm" />
+        <input type="number" value={hargaBeli} min={1} onChange={(e) => setHargaBeli(e.target.value)} required className="border border-slate-400 h-7 rounded-sm" />
       </div>
       <div className="flex flex-col">
         <label>Harga Jual</label>
-        <input type="number" value={hargaJual} onChange={(e) => setHargaJual(e.target.value)} required className="border border-slate-400 h-7 rounded-sm" />
+        <input type="number" value={hargaJual} min={1} onChange={(e) => setHargaJual(e.target.value)} required className="border border-slate-400 h-7 rounded-sm" />
       </div>
       <div className="flex flex-col">
         <label>Stok</label>

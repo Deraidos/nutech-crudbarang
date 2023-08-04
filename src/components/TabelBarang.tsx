@@ -21,9 +21,9 @@ export default function TabelBarang() {
   const listBarang = useSelector(
     (state: RootState) => state.barang.value)
 
-  const handleDelete = () => {
+  const handleDelete = (id) => {
     if (window.confirm('Yakin ingin menghapus barang ini?')) {
-      dispatch(deleteBarang(listBarang.namaBarang));
+      dispatch(deleteBarang({ id }));
       toast('Barang dihapus', {
         position: "top-center",
         autoClose: 1000,
@@ -51,7 +51,7 @@ export default function TabelBarang() {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {listBarang.length == 0 ? (
+        {!listBarang ? (
           <TableRow>
             <TableCell colSpan={8} align="center">
               <p>Tidak ada barang</p>
@@ -67,7 +67,7 @@ export default function TabelBarang() {
               <TableCell><p>{barang.stok}</p></TableCell>
               <TableCell className="flex gap-1">
                 <Button>Edit</Button>
-                <Button variant="destructive" onClick={handleDelete}>Delete</Button>
+                <Button variant="destructive" onClick={() => handleDelete(barang.id)}>Delete</Button>
               </TableCell>
             </TableRow>
           ))
