@@ -30,6 +30,7 @@ export default function FormEditBarang() {
 
     // @ts-ignore
     dispatch(editBarang({
+      ...barang,
       namaBarang,
       hargaBeli,
       hargaJual,
