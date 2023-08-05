@@ -39,9 +39,12 @@ export const barangSlice = createSlice({
         (barang) => barang.id !== action.payload.id
       )
     },
+    editBarang: (state, action: PayloadAction<Barang>) => {
+      state.value = state.value.map((barang) => barang.id == action.payload.id)
+    },
   },
 })
 
-export const { addBarang, deleteBarang } = barangSlice.actions
+export const { addBarang, deleteBarang, editBarang } = barangSlice.actions
 
 export default barangSlice.reducer

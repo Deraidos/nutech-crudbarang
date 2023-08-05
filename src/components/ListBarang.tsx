@@ -68,7 +68,7 @@ export default function ListBarang() {
                 <TableCell><p>Rp {barang.hargaJual}</p></TableCell>
                 <TableCell><p>{barang.stok}</p></TableCell>
                 <TableCell className="flex gap-1">
-                  <Button>Edit</Button>
+                  <Link to={`/edit/${barang.id}`}><Button variant="default">Edit</Button></Link>
                   <Button variant="destructive" onClick={() => handleDelete(barang.id)}>Delete</Button>
                 </TableCell>
               </TableRow>

@@ -5,17 +5,15 @@ import { Button } from "./ui/button";
 import { toast } from "react-toastify";
 
 import { useDispatch, useSelector } from "react-redux";
-import { addBarang } from "@/redux/slices/barangSlice";
+import { editBarang } from "@/redux/slices/barangSlice";
 import { RootState } from "@/redux/store";
-import { Barang } from '../interfaces';
-import { nanoid } from "@reduxjs/toolkit";
 import { useNavigate } from "react-router-dom";
 
-export default function FormTambahBarang({ barang }) {
-  const [namaBarang, setNamaBarang] = useState(barang ? barang.namaBarang : '');
-  const [hargaBeli, setHargaBeli] = useState(barang ? barang.hargaBeli : '');
-  const [hargaJual, setHargaJual] = useState(barang ? barang.hargaJual : '');
-  const [stok, setStok] = useState(barang ? barang.stok : '');
+export default function FormEditBarang({ barang }) {
+  const [namaBarang, setNamaBarang] = useState('');
+  const [hargaBeli, setHargaBeli] = useState('');
+  const [hargaJual, setHargaJual] = useState('');
+  const [stok, setStok] = useState('');
   // const [foto, setFoto] = useState(null);
 
   const listBarang = useSelector(
@@ -24,29 +22,20 @@ export default function FormTambahBarang({ barang }) {
   const dispatch = useDispatch()
   const navigate = useNavigate();
 
-  const handleAddBarang = (e) => {
+  const handleEditBarang = (e) => {
     e.preventDefault()
 
-    const isNamaBarangUnique = !listBarang.some((barang) => barang.namaBarang === namaBarang);
-
-    if (!isNamaBarangUnique) {
-      alert('Barang sudah ada. Gunakan nama lain')
-      return
-    }
-
-    const newBarang: Barang = {
-      id: nanoid(),
+    const updatedBarang = {
       namaBarang,
       hargaBeli,
       hargaJual,
       stok,
-      foto: <img src={`https://picsum.photos/200?random=${Math.random()}`} />
     }
     // @ts-ignore
-    dispatch(addBarang(newBarang))
+    dispatch(editBarang(updatedBarang))
     navigate('/')
 
-    toast('Barang ditambahkan', {
+    toast('Barang berhasil di-edit', {
       position: "top-center",
       autoClose: 1000,
       hideProgressBar: true,
@@ -66,7 +55,7 @@ export default function FormTambahBarang({ barang }) {
   }
 
   return (
-    <form onSubmit={handleAddBarang} className="flex flex-col gap-3">
+    <form onSubmit={handleEditBarang} className="flex flex-col gap-3">
       <div className="flex flex-col">
         <label>Nama Barang</label>
         <input type="text" value={namaBarang} id="namaBarang" onChange={(e) => setNamaBarang(e.target.value)} required className="border border-slate-400 h-7 rounded-sm" />
@@ -83,7 +72,7 @@ export default function FormTambahBarang({ barang }) {
         <label>Stok</label>
         <input type="number" value={stok} onChange={(e) => setStok(e.target.value)} required className="border border-slate-400 h-7 rounded-sm" />
       </div>
-      <Button variant="default">Tambah</Button>
+      <Button variant="default">Edit</Button>
     </form>
   )
 }

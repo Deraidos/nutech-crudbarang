@@ -3,6 +3,7 @@ import './App.css'
 import 'react-toastify/dist/ReactToastify.css';
 import ListBarang from "./components/ListBarang"
 import FormTambahBarang from "./components/FormTambahBarang"
+import FormEditBarang from './components/FormEditBarang';
 import { Route, Routes } from 'react-router-dom'
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
         <Routes>
           <Route path="/" element={<ListBarang />} />
           <Route path="/add" element={<FormTambahBarang barang={undefined} />} />
+          <Route path="/edit/:id" element={<FormEditBarang barang={undefined} />} />
         </Routes>
       </section >
     </div >
