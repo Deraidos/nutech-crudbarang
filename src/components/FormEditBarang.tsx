@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Button } from "./ui/button";
 import { toast } from "react-toastify";
 
@@ -30,7 +30,7 @@ export default function FormEditBarang() {
 
     // @ts-ignore
     dispatch(editBarang({
-      ...barang,
+      ...barang, // idk but adding this spread operator fixed it for some reason
       namaBarang,
       hargaBeli,
       hargaJual,
