@@ -9,6 +9,7 @@ import { addBarang } from "@/redux/slices/barangSlice";
 import { RootState } from "@/redux/store";
 import { Barang } from '../interfaces';
 import { nanoid } from "@reduxjs/toolkit";
+import { useNavigate } from "react-router-dom";
 
 export default function FormTambahBarang({ barang }) {
   const [namaBarang, setNamaBarang] = useState(barang ? barang.namaBarang : '');
@@ -20,6 +21,8 @@ export default function FormTambahBarang({ barang }) {
   const listBarang = useSelector(
     (state: RootState) => state.barang.value)
   const dispatch = useDispatch()
+
+  const navigate = useNavigate();
 
   const handleAddBarang = (e) => {
     e.preventDefault()
@@ -41,6 +44,7 @@ export default function FormTambahBarang({ barang }) {
     }
     // @ts-ignore
     dispatch(addBarang(newBarang))
+    navigate('/')
 
     toast('Barang ditambahkan', {
       position: "top-center",

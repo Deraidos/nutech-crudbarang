@@ -1,8 +1,9 @@
 
 import './App.css'
 import 'react-toastify/dist/ReactToastify.css';
-import TabelBarang from "./components/TabelBarang"
+import ListBarang from "./components/ListBarang"
 import FormTambahBarang from "./components/FormTambahBarang"
+import { Route, Routes } from 'react-router-dom'
 
 function App() {
 
@@ -13,17 +14,16 @@ function App() {
       </div>
 
       <section className='flex flex-row justify-between'>
-        <div id='add item' className='flex flex-col gap-3'>
+        {/* <div id='add item' className='flex flex-col gap-3'>
           <h2 className='text-2xl'>Tambah Barang</h2>
           <FormTambahBarang barang={undefined} />
-        </div>
+        </div> */}
 
-        <aside className='flex flex-col gap-3 w-[75%]'>
-          <h2 className='text-2xl'>List Barang</h2>
-          <TabelBarang />
-
-        </aside>
-      </section>
+        <Routes>
+          <Route path="/" element={<ListBarang />} />
+          <Route path="/add" element={<FormTambahBarang barang={undefined} />} />
+        </Routes>
+      </section >
     </div >
   )
 }
