@@ -1,23 +1,26 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "./ui/button";
 import { toast } from "react-toastify";
 
 import { useDispatch, useSelector } from "react-redux";
 import { editBarang } from "@/redux/slices/barangSlice";
 import { RootState } from "@/redux/store";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
-export default function FormEditBarang({ barang }) {
-  const [namaBarang, setNamaBarang] = useState('');
-  const [hargaBeli, setHargaBeli] = useState('');
-  const [hargaJual, setHargaJual] = useState('');
-  const [stok, setStok] = useState('');
+export default function FormEditBarang() {
+  const { id } = useParams();
+  const barang = useSelector(
+    (state: RootState) => state.barang.value.find((barang) => barang.id == id))
+  // const barang = listBarang.filter(b => b.id == id)
+
+  const [namaBarang, setNamaBarang] = useState(barang ? barang.namaBarang : "");
+  const [hargaBeli, setHargaBeli] = useState(barang ? barang.hargaBeli : "");
+  const [hargaJual, setHargaJual] = useState(barang ? barang.hargaJual : "");
+  const [stok, setStok] = useState(barang ? barang.stok : "");
+
   // const [foto, setFoto] = useState(null);
-
-  const listBarang = useSelector(
-    (state: RootState) => state.barang.value)
 
   const dispatch = useDispatch()
   const navigate = useNavigate();
@@ -25,14 +28,13 @@ export default function FormEditBarang({ barang }) {
   const handleEditBarang = (e) => {
     e.preventDefault()
 
-    const updatedBarang = {
+    // @ts-ignore
+    dispatch(editBarang({
       namaBarang,
       hargaBeli,
       hargaJual,
-      stok,
-    }
-    // @ts-ignore
-    dispatch(editBarang(updatedBarang))
+      stok
+    }))
     navigate('/')
 
     toast('Barang berhasil di-edit', {

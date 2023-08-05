@@ -40,7 +40,10 @@ export const barangSlice = createSlice({
       )
     },
     editBarang: (state, action: PayloadAction<Barang>) => {
-      state.value = state.value.map((barang) => barang.id == action.payload.id)
+      const updatedBarang = action.payload
+      state.value = state.value.map((barang) =>
+        barang.id === updatedBarang.id ? updatedBarang : barang
+      )
     },
   },
 })

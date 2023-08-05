@@ -15,15 +15,10 @@ function App() {
       </div>
 
       <section className='flex flex-row justify-between'>
-        {/* <div id='add item' className='flex flex-col gap-3'>
-          <h2 className='text-2xl'>Tambah Barang</h2>
-          <FormTambahBarang barang={undefined} />
-        </div> */}
-
         <Routes>
           <Route path="/" element={<ListBarang />} />
           <Route path="/add" element={<FormTambahBarang barang={undefined} />} />
-          <Route path="/edit/:id" element={<FormEditBarang barang={undefined} />} />
+          <Route path="/edit/:id" element={<FormEditBarang />} />
         </Routes>
       </section >
     </div >
