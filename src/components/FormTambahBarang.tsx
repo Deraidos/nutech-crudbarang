@@ -68,6 +68,7 @@ export default function FormTambahBarang({ barang }) {
 
   return (
     <form onSubmit={handleAddBarang} className="flex flex-col gap-3">
+      <h1 className="text-xl font-medium">Tambah Barang</h1>
       <div className="flex flex-col">
         <label>Nama Barang</label>
         <input type="text" value={namaBarang} id="namaBarang" onChange={(e) => setNamaBarang(e.target.value)} required className="border border-slate-400 h-7 rounded-sm" />

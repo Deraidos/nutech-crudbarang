@@ -59,6 +59,7 @@ export default function FormEditBarang() {
 
   return (
     <form onSubmit={handleEditBarang} className="flex flex-col gap-3">
+      <h1 className="text-xl font-medium">Edit Barang</h1>
       <div className="flex flex-col">
         <label>Nama Barang</label>
         <input type="text" value={namaBarang} id="namaBarang" onChange={(e) => setNamaBarang(e.target.value)} required className="border border-slate-400 h-7 rounded-sm" />
