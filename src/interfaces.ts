@@ -4,7 +4,7 @@ export interface Barang {
   hargaBeli: number
   hargaJual: number
   stok: number
-  foto: JSX.Element | null
+  foto: string | null
 }
 
 export interface FormTambahBarangProps {

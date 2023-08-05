@@ -30,7 +30,7 @@ export default function FormEditBarang() {
 
     // @ts-ignore
     dispatch(editBarang({
-      ...barang, // idk but adding this spread operator fixed it for some reason
+      ...barang, // INFO: line 83
       namaBarang,
       hargaBeli,
       hargaJual,
@@ -79,3 +79,5 @@ export default function FormEditBarang() {
     </form>
   )
 }
+
+ // 83: By using the spread operator, you are creating a new object with the same initial values as barang but without directly modifying the original object. This is essential when dealing with state updates in Redux or React components, as you should avoid mutating the original state directly. Instead, you create a new object with the updated values and use that new object for state updates or Redux actions.

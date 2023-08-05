@@ -11,6 +11,7 @@ import { Barang } from '../interfaces';
 import { nanoid } from "@reduxjs/toolkit";
 import { useNavigate } from "react-router-dom";
 
+
 export default function FormTambahBarang({ barang }) {
   const [namaBarang, setNamaBarang] = useState(barang ? barang.namaBarang : '');
   const [hargaBeli, setHargaBeli] = useState(barang ? barang.hargaBeli : '');
@@ -40,7 +41,7 @@ export default function FormTambahBarang({ barang }) {
       hargaBeli,
       hargaJual,
       stok,
-      foto: <img src={`https://picsum.photos/200?random=${Math.random()}`} />
+      foto: `https://picsum.photos/300?random=${Math.random()}`
     }
     // @ts-ignore
     dispatch(addBarang(newBarang))
@@ -83,6 +84,7 @@ export default function FormTambahBarang({ barang }) {
         <label>Stok</label>
         <input type="number" value={stok} onChange={(e) => setStok(e.target.value)} required className="border border-slate-400 h-7 rounded-sm" />
       </div>
+
       <Button variant="default">Tambah</Button>
     </form>
   )

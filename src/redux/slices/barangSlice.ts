@@ -14,6 +14,7 @@ const initialState: BarangState = {
       hargaBeli: 10,
       hargaJual: 20,
       stok: 10,
+      foto: `https://images.pexels.com/photos/3675622/pexels-photo-3675622.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=400`,
     },
     {
       id: nanoid(),
@@ -21,6 +22,7 @@ const initialState: BarangState = {
       hargaBeli: 50,
       hargaJual: 100,
       stok: 5,
+      foto: `https://media.istockphoto.com/id/1319273649/photo/portable-air-conditioner-in-the-office-connected-to-an-outlet.jpg?s=612x612&w=0&k=20&c=RzzzVDU6dfdQS9iVvYveftiM8QcTRwR9LhmrQe4MbLo=`,
     },
   ],
 }

@@ -62,7 +62,7 @@ export default function ListBarang() {
           {listBarang && listBarang.length ? (
             listBarang.map((barang) => (
               <TableRow key={barang.id}>
-                <TableCell>{barang.foto}</TableCell>
+                <TableCell className="w-[25%]"><img src={barang.foto} /></TableCell>
                 <TableCell className="font-medium"><p>{barang.namaBarang}</p></TableCell>
                 <TableCell><p>Rp {barang.hargaBeli}</p></TableCell>
                 <TableCell><p>Rp {barang.hargaJual}</p></TableCell>
