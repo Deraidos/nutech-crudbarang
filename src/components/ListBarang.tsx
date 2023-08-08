@@ -16,7 +16,7 @@ import { ToastContainer, toast } from 'react-toastify';
 // import { RootState } from "@/redux/store"
 // import { deleteBarang } from "@/redux/slices/barangSlice"
 import { useGetBarangQuery, useDeleteBarangMutation } from "@/redux/slices/apiSlice"
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 
 
 
@@ -26,7 +26,7 @@ export default function ListBarang() {
   //   (state: RootState) => state.barang.value)
 
   const { data: listBarang } = useGetBarangQuery();
-  const [deleteBarangMutation] = useDeleteBarangMutation();
+  const [deleteBarang] = useDeleteBarangMutation();
 
   // const handleDelete = (id) => {
   //   if (window.confirm('Yakin ingin menghapus barang ini?')) {
@@ -49,7 +49,7 @@ export default function ListBarang() {
     if (window.confirm('Yakin ingin menghapus barang ini?')) {
       try {
         // Call the deleteBarangMutation function with the ID
-        await deleteBarangMutation(id);
+        await deleteBarang(id);
         // Handle successful deletion
         console.log('Deleted barang with ID:', id);
         toast('Barang dihapus', {
@@ -76,6 +76,7 @@ export default function ListBarang() {
           type: "error",
         });
       }
+      Navigate
     }
   }
 
