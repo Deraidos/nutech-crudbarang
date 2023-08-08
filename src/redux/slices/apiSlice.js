@@ -12,12 +12,10 @@ export const barangApi = createApi({
       },
     }),
     deleteBarang: builder.mutation({
+      // Use builder.mutation for delete operation
       queryFn: async (id) => {
-        const { data, error } = await supabase
-          .from('barang')
-          .delete()
-          .eq('id', id)
-        return { data, error }
+        const { error } = await supabase.from('barang').delete().eq('id', id)
+        return { error }
       },
     }),
   }),

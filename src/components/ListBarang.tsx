@@ -15,7 +15,7 @@ import { ToastContainer, toast } from 'react-toastify';
 // import { useSelector, useDispatch } from "react-redux"
 // import { RootState } from "@/redux/store"
 // import { deleteBarang } from "@/redux/slices/barangSlice"
-import { useGetBarangQuery } from "@/redux/slices/apiSlice"
+import { useGetBarangQuery, useDeleteBarangMutation } from "@/redux/slices/apiSlice"
 import { Link } from "react-router-dom";
 
 
@@ -26,6 +26,7 @@ export default function ListBarang() {
   //   (state: RootState) => state.barang.value)
 
   const { data: listBarang } = useGetBarangQuery();
+  const [deleteBarangMutation] = useDeleteBarangMutation();
 
   // const handleDelete = (id) => {
   //   if (window.confirm('Yakin ingin menghapus barang ini?')) {
@@ -44,6 +45,39 @@ export default function ListBarang() {
   //   }
   // }
 
+  const handleDelete = async (id) => {
+    if (window.confirm('Yakin ingin menghapus barang ini?')) {
+      try {
+        // Call the deleteBarangMutation function with the ID
+        await deleteBarangMutation(id);
+        // Handle successful deletion
+        console.log('Deleted barang with ID:', id);
+        toast('Barang dihapus', {
+          position: "top-center",
+          autoClose: 1000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          type: "success",
+        });
+      } catch (error) {
+        // Handle error if deletion fails
+        console.error('Error deleting barang:', error);
+        toast('Gagal menghapus barang', {
+          position: "top-center",
+          autoClose: 1000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          type: "error",
+        });
+      }
+    }
+  }
 
   return (
     <div className='flex flex-col gap-3 w-[100%]'>

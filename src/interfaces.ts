@@ -1,5 +1,5 @@
 export interface Barang {
-  id: string
+  id: number
   namaBarang: string
   hargaBeli: number
   hargaJual: number
