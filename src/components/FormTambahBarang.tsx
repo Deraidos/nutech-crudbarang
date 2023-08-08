@@ -56,26 +56,10 @@ export default function FormTambahBarang({ barang }) {
           progress: undefined,
           type: "success",
         });
-        navigate('/')
+
         setTimeout(() => {
           window.location.reload()
         }, 800)
-        setNamaBarang('');
-        setHargaBeli('');
-        setHargaJual('');
-        setStok('');
-      } else {
-        console.error('Error adding barang:', error);
-        toast('Gagal menambahkan barang', {
-          position: "top-center",
-          autoClose: 1000,
-          hideProgressBar: true,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          type: "error",
-        });
       }
     } catch (error) {
       console.error('Error adding barang:', error);
@@ -86,7 +70,6 @@ export default function FormTambahBarang({ barang }) {
 
     // @ts-ignore
     // dispatch(addBarang(newBarang))
-
 
     setNamaBarang('')
     setHargaBeli('')

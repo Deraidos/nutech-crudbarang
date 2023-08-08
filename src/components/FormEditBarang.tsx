@@ -4,56 +4,87 @@ import { useState } from "react";
 import { Button } from "./ui/button";
 import { toast } from "react-toastify";
 
-import { useDispatch, useSelector } from "react-redux";
-import { editBarang } from "@/redux/slices/barangSlice";
-import { RootState } from "@/redux/store";
+// import { useDispatch, useSelector } from "react-redux";
+// import { editBarang } from "@/redux/slices/barangSlice";
+// import { RootState } from "@/redux/store";
+import { useGetBarangQuery, useUpdateBarangMutation } from "@/redux/slices/apiSlice"
 import { useNavigate, useParams } from "react-router-dom";
 
 export default function FormEditBarang() {
+  // const dispatch = useDispatch()
+  // const barang = useSelector(
+  //   (state: RootState) => state.barang.value.find((barang) => barang.id == id))
+  // // const barang = listBarang.filter(b => b.id == id)
   const { id } = useParams();
-  const barang = useSelector(
-    (state: RootState) => state.barang.value.find((barang) => barang.id == id))
-  // const barang = listBarang.filter(b => b.id == id)
+  const { data: listBarang } = useGetBarangQuery();
+  const updateBarangMutation = useUpdateBarangMutation();
+  const barang = listBarang.find((barang) => barang.id === id);
 
-  const [namaBarang, setNamaBarang] = useState(barang ? barang.namaBarang : "");
-  const [hargaBeli, setHargaBeli] = useState(barang ? barang.hargaBeli : "");
-  const [hargaJual, setHargaJual] = useState(barang ? barang.hargaJual : "");
+  const [namaBarang, setNamaBarang] = useState(barang ? barang.nama_barang : "");
+  const [hargaBeli, setHargaBeli] = useState(barang ? barang.harga_beli : "");
+  const [hargaJual, setHargaJual] = useState(barang ? barang.harga_jual : "");
   const [stok, setStok] = useState(barang ? barang.stok : "");
 
-  // const [foto, setFoto] = useState(null);
-
-  const dispatch = useDispatch()
   const navigate = useNavigate();
 
-  const handleEditBarang = (e) => {
+  const handleEditBarang = async (e) => {
     e.preventDefault()
 
-    // @ts-ignore
-    dispatch(editBarang({
-      ...barang, // INFO: line 83
-      namaBarang,
-      hargaBeli,
-      hargaJual,
-      stok
-    }))
-    navigate('/')
+    const updatedBarang = {
+      nama_barang: namaBarang,
+      harga_beli: hargaBeli,
+      harga_jual: hargaJual,
+      stok: stok
+    }
 
-    toast('Barang berhasil di-edit', {
-      position: "top-center",
-      autoClose: 1000,
-      hideProgressBar: true,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      type: "success",
-    });
+    try {
+      const { error } = await updateBarangMutation(updatedBarang)
+      if (!error) {
+        navigate('/');
+        toast('Barang berhasil di-edit', {
+          position: "top-center",
+          autoClose: 1000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          type: "success",
+        });
+
+        setTimeout(() => {
+          window.location.reload()
+        }, 800)
+      }
+    } catch (error) {
+      console.error('Error edit barang:', error);
+      navigate('/');
+      toast('Gagal mengedit barang', {
+        position: "top-center",
+        autoClose: 1000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        type: "error",
+      });
+    }
 
     setNamaBarang('')
     setHargaBeli('')
     setHargaJual('')
     setStok('')
     // setFoto(null)
+
+    // @ts-ignore
+    // dispatch(editBarang({
+    //   ...barang, // INFO: line 83
+    //   namaBarang,
+    //   hargaBeli,
+    //   hargaJual,
+    //   stok
+    // }))
 
   }
 
