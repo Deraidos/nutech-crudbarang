@@ -8,7 +8,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { addBarang } from "@/redux/slices/barangSlice";
 import { RootState } from "@/redux/store";
 import { Barang } from '../interfaces';
-import { nanoid } from "@reduxjs/toolkit";
 import { useNavigate } from "react-router-dom";
 
 
@@ -19,10 +18,10 @@ export default function FormTambahBarang({ barang }) {
   const [stok, setStok] = useState(barang ? barang.stok : '');
   // const [foto, setFoto] = useState(null);
 
-  const listBarang = useSelector(
-    (state: RootState) => state.barang.value)
+  // const listBarang = useSelector(
+  //   (state: RootState) => state.barang.value)
+  const { data: listBarang } = useGetBarangQuery();
 
-  const dispatch = useDispatch()
   const navigate = useNavigate();
 
   const handleAddBarang = (e) => {
@@ -36,7 +35,6 @@ export default function FormTambahBarang({ barang }) {
     }
 
     const newBarang: Barang = {
-      id: nanoid(),
       namaBarang,
       hargaBeli,
       hargaJual,

@@ -16,12 +16,10 @@ import { ToastContainer, toast } from 'react-toastify';
 // import { RootState } from "@/redux/store"
 // import { deleteBarang } from "@/redux/slices/barangSlice"
 import { useGetBarangQuery, useDeleteBarangMutation } from "@/redux/slices/apiSlice"
-import { Link, Navigate } from "react-router-dom";
-
+import { Link, useNavigate } from "react-router-dom";
 
 
 export default function ListBarang() {
-  // const dispatch = useDispatch()
   // const listBarang = useSelector(
   //   (state: RootState) => state.barang.value)
 
@@ -76,8 +74,10 @@ export default function ListBarang() {
           type: "error",
         });
       }
-      Navigate
     }
+    setTimeout(() => {
+      window.location.reload()
+    }, 1000)
   }
 
   return (
