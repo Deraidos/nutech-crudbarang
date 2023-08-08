@@ -11,6 +11,15 @@ export const barangApi = createApi({
         return { data, error }
       },
     }),
+    addBarang: builder.mutation({
+      queryFn: async (newBarang) => {
+        const { error } = await supabase
+          .from('barang')
+          .insert([newBarang])
+          .select()
+        return { error }
+      },
+    }),
     deleteBarang: builder.mutation({
       // Use builder.mutation for delete operation
       queryFn: async (id) => {
@@ -24,4 +33,8 @@ export const barangApi = createApi({
   }),
 })
 
-export const { useGetBarangQuery, useDeleteBarangMutation } = barangApi
+export const {
+  useGetBarangQuery,
+  useDeleteBarangMutation,
+  useAddBarangMutation,
+} = barangApi

@@ -7,8 +7,8 @@ import { toast } from "react-toastify";
 // import { useDispatch, useSelector } from "react-redux";
 // import { RootState } from "@/redux/store";
 // import { addBarang } from "@/redux/slices/barangSlice";
-import { useGetBarangQuery } from "@/redux/slices/apiSlice"
-import { Barang } from '../interfaces';
+import { useGetBarangQuery, useAddBarangMutation } from "@/redux/slices/apiSlice"
+// import { Barang } from '../interfaces';
 import { useNavigate } from "react-router-dom";
 
 
@@ -22,10 +22,10 @@ export default function FormTambahBarang({ barang }) {
   // const listBarang = useSelector(
   //   (state: RootState) => state.barang.value)
   const { data: listBarang } = useGetBarangQuery();
-
+  const [addBarangMutation] = useAddBarangMutation();
   const navigate = useNavigate();
 
-  const handleAddBarang = (e) => {
+  const handleAddBarang = async (e) => {
     e.preventDefault()
 
     const isNamaBarangUnique = !listBarang.some((barang) => barang.namaBarang === namaBarang);
@@ -35,27 +35,58 @@ export default function FormTambahBarang({ barang }) {
       return
     }
 
-    const newBarang: Barang = {
-      namaBarang,
-      hargaBeli,
-      hargaJual,
+    const newBarang = {
+      nama_barang: namaBarang,
+      harga_beli: hargaBeli,
+      harga_jual: hargaJual,
       stok,
-      foto: `https://picsum.photos/300?random=${Math.random()}`
+      foto: `https://picsum.photos/400?random=${Math.random()}`
     }
-    // @ts-ignore
-    dispatch(addBarang(newBarang))
-    navigate('/')
+    try {
+      const { error } = await addBarangMutation(newBarang);
+      if (!error) {
+        navigate('/');
+        toast('Barang ditambahkan', {
+          position: "top-center",
+          autoClose: 1000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          type: "success",
+        });
+        navigate('/')
+        setTimeout(() => {
+          window.location.reload()
+        }, 800)
+        setNamaBarang('');
+        setHargaBeli('');
+        setHargaJual('');
+        setStok('');
+      } else {
+        console.error('Error adding barang:', error);
+        toast('Gagal menambahkan barang', {
+          position: "top-center",
+          autoClose: 1000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          type: "error",
+        });
+      }
+    } catch (error) {
+      console.error('Error adding barang:', error);
+      toast('Gagal menambahkan barang', {
+        // ... (toast configuration)
+      });
+    }
 
-    toast('Barang ditambahkan', {
-      position: "top-center",
-      autoClose: 1000,
-      hideProgressBar: true,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      type: "success",
-    });
+    // @ts-ignore
+    // dispatch(addBarang(newBarang))
+
 
     setNamaBarang('')
     setHargaBeli('')
