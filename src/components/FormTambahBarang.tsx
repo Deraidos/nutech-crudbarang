@@ -4,9 +4,10 @@ import { useState } from "react";
 import { Button } from "./ui/button";
 import { toast } from "react-toastify";
 
-import { useDispatch, useSelector } from "react-redux";
-import { addBarang } from "@/redux/slices/barangSlice";
-import { RootState } from "@/redux/store";
+// import { useDispatch, useSelector } from "react-redux";
+// import { RootState } from "@/redux/store";
+// import { addBarang } from "@/redux/slices/barangSlice";
+import { useGetBarangQuery } from "@/redux/slices/apiSlice"
 import { Barang } from '../interfaces';
 import { useNavigate } from "react-router-dom";
 

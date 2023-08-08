@@ -16,7 +16,7 @@ import { ToastContainer, toast } from 'react-toastify';
 // import { RootState } from "@/redux/store"
 // import { deleteBarang } from "@/redux/slices/barangSlice"
 import { useGetBarangQuery, useDeleteBarangMutation } from "@/redux/slices/apiSlice"
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 
 export default function ListBarang() {

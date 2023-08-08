@@ -1,10 +1,10 @@
 export interface Barang {
-  id: number
+  id?: number
   namaBarang: string
   hargaBeli: number
   hargaJual: number
   stok: number
-  foto: string | null
+  foto?: string | null
 }
 
 export interface FormTambahBarangProps {
