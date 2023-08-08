@@ -1,13 +1,14 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "./ui/button";
 import { toast } from "react-toastify";
+import supabase from '../lib/supabase'
 
 // import { useDispatch, useSelector } from "react-redux";
 // import { editBarang } from "@/redux/slices/barangSlice";
 // import { RootState } from "@/redux/store";
-import { useGetBarangQuery, useUpdateBarangMutation } from "@/redux/slices/apiSlice"
+import { useGetBarangQuery } from "@/redux/slices/apiSlice"
 import { useNavigate, useParams } from "react-router-dom";
 
 export default function FormEditBarang() {
@@ -15,30 +16,122 @@ export default function FormEditBarang() {
   // const barang = useSelector(
   //   (state: RootState) => state.barang.value.find((barang) => barang.id == id))
   // // const barang = listBarang.filter(b => b.id == id)
-  const { id } = useParams();
-  const { data: listBarang } = useGetBarangQuery();
-  const barang = listBarang
-  const updateBarangMutation = useUpdateBarangMutation();
 
-  const [namaBarang, setNamaBarang] = useState(barang ? barang.nama_barang : "");
-  const [hargaBeli, setHargaBeli] = useState(barang ? barang.harga_beli : "");
-  const [hargaJual, setHargaJual] = useState(barang ? barang.harga_jual : "");
-  const [stok, setStok] = useState(barang ? barang.stok : "");
+  // const [updateBarangMutation] = useUpdateBarangMutation();
+
+  const { data: listBarang } = useGetBarangQuery();
+  const { id } = useParams();
+  const barang = listBarang.find(barang => barang.id === id);
+  console.log("Current Barang:", barang);
+
+  const [namaBarang, setNamaBarang] = useState("");
+  const [hargaBeli, setHargaBeli] = useState("");
+  const [hargaJual, setHargaJual] = useState("");
+  const [stok, setStok] = useState("");
+
+  useEffect(() => {
+    if (barang) {
+      setNamaBarang(barang.nama_barang);
+      setHargaBeli(barang.harga_beli);
+      setHargaJual(barang.harga_jual);
+      setStok(barang.stok);
+    }
+  }, [barang]);
 
   const navigate = useNavigate();
 
+  // const handleEditBarang = async (e) => {
+  //   e.preventDefault()
+
+  //   const updatedBarang = {
+  //     ...barang,
+  //     nama_barang: namaBarang,
+  //     harga_beli: hargaBeli,
+  //     harga_jual: hargaJual,
+  //     stok: stok
+  //   }
+
+  //   try {
+  //     const { error } = await updateBarangMutation(updatedBarang)
+  //     if (!error) {
+  //       navigate('/');
+  //       console.log('Edited barang with ID:', id);
+  //       toast('Barang berhasil di-edit', {
+  //         position: "top-center",
+  //         autoClose: 1000,
+  //         hideProgressBar: true,
+  //         closeOnClick: true,
+  //         pauseOnHover: true,
+  //         draggable: true,
+  //         progress: undefined,
+  //         type: "success",
+  //       });
+
+  //       setTimeout(() => {
+  //         window.location.reload()
+  //       }, 800)
+  //     } else {
+  //       navigate('/');
+
+  //       console.error('Error edit barang:', error);
+  //       toast('Gagal mengedit barang', {
+  //         position: "top-center",
+  //         autoClose: 1000,
+  //         hideProgressBar: true,
+  //         closeOnClick: true,
+  //         pauseOnHover: true,
+  //         draggable: true,
+  //         progress: undefined,
+  //         type: "error",
+  //       });
+  //     }
+  //   } catch (error) {
+  //     console.error('Error edit barang:', error);
+  //     toast('Gagal mengedit barang', {
+  //       position: "top-center",
+  //       autoClose: 1000,
+  //       hideProgressBar: true,
+  //       closeOnClick: true,
+  //       pauseOnHover: true,
+  //       draggable: true,
+  //       progress: undefined,
+  //       type: "error",
+  //     });
+  //   }
+
+  //   setNamaBarang('')
+  //   setHargaBeli('')
+  //   setHargaJual('')
+  //   setStok('')
+  //   // setFoto(null)
+
+  //   // @ts-ignore
+  //   // dispatch(editBarang({
+  //   //   ...barang, // INFO: line 83
+  //   //   namaBarang,
+  //   //   hargaBeli,
+  //   //   hargaJual,
+  //   //   stok
+  //   // }))
+
+  // }
+
   const handleEditBarang = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
     const updatedBarang = {
       nama_barang: namaBarang,
       harga_beli: hargaBeli,
       harga_jual: hargaJual,
       stok: stok
-    }
+    };
 
     try {
-      const { error } = await updateBarangMutation(updatedBarang)
+      const { error } = await supabase
+        .from('barang')
+        .update([updatedBarang])
+        .eq('id', id);
+
       if (!error) {
         navigate('/');
         toast('Barang berhasil di-edit', {
@@ -53,8 +146,21 @@ export default function FormEditBarang() {
         });
 
         setTimeout(() => {
-          window.location.reload()
-        }, 800)
+          window.location.reload();
+        }, 800);
+      } else {
+        console.error('Error edit barang:', error);
+        navigate('/');
+        toast('Gagal mengedit barang', {
+          position: "top-center",
+          autoClose: 1000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          type: "error",
+        });
       }
     } catch (error) {
       console.error('Error edit barang:', error);
@@ -71,21 +177,11 @@ export default function FormEditBarang() {
       });
     }
 
-    setNamaBarang('')
-    setHargaBeli('')
-    setHargaJual('')
-    setStok('')
-    // setFoto(null)
-
-    // @ts-ignore
-    // dispatch(editBarang({
-    //   ...barang, // INFO: line 83
-    //   namaBarang,
-    //   hargaBeli,
-    //   hargaJual,
-    //   stok
-    // }))
-
+    // Reset form values
+    setNamaBarang('');
+    setHargaBeli('');
+    setHargaJual('');
+    setStok('');
   }
 
   return (

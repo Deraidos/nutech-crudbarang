@@ -60,6 +60,18 @@ export default function FormTambahBarang({ barang }) {
         setTimeout(() => {
           window.location.reload()
         }, 800)
+      } else {
+        console.error('Error adding barang:', error);
+        toast('Gagal menambahkan barang', {
+          position: "top-center",
+          autoClose: 1000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          type: "error",
+        });
       }
     } catch (error) {
       console.error('Error adding barang:', error);
