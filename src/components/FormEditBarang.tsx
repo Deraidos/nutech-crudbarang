@@ -17,8 +17,8 @@ export default function FormEditBarang() {
   // // const barang = listBarang.filter(b => b.id == id)
   const { id } = useParams();
   const { data: listBarang } = useGetBarangQuery();
+  const barang = listBarang
   const updateBarangMutation = useUpdateBarangMutation();
-  const barang = listBarang.find((barang) => barang.id === id);
 
   const [namaBarang, setNamaBarang] = useState(barang ? barang.nama_barang : "");
   const [hargaBeli, setHargaBeli] = useState(barang ? barang.harga_beli : "");
