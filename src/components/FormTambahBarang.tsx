@@ -28,7 +28,7 @@ export default function FormTambahBarang({ barang }) {
   const handleAddBarang = async (e) => {
     e.preventDefault()
 
-    const isNamaBarangUnique = !listBarang.some((barang) => barang.namaBarang === namaBarang);
+    const isNamaBarangUnique = !listBarang.some((barang) => barang.nama_barang === namaBarang);
 
     if (!isNamaBarangUnique) {
       alert('Barang sudah ada. Gunakan nama lain')
